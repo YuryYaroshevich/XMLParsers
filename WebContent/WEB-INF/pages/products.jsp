@@ -4,17 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Main</title>
+<title>Products</title>
 </head>
 <body>
-	<div>
-		<a href="/XMLParsers/controller?command=PARSE&parser=SAX">SAX</a>
-	</div>
-	<div>
-		<a href="/XMLParsers/controller?command=PARSE&parser=DOM">DOM</a>
-	</div>
-	<div>
-		<a href="/XMLParsers/controller?command=PARSE&parser=STAX">STAX</a>
-	</div>
+	here some products
+
+	<form action="controller" method="get">
+	    <input type="hidden" name="command" value="NO_COMMAND" />
+		<input type="submit" value="BACK" />
+	</form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.epam.xmlparser.product;
+package com.epam.xptask.product;
 
 public class Good {
 	private String producer;

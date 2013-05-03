@@ -1,22 +1,29 @@
-package com.epam.xmlparser.product;
+package com.epam.xptask.product;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Subcategory {
+	private String name;
+	
 	private List<Good> goods;
 	
-	public Subcategory() {
+	public Subcategory(String name) {
+		this.name = name;
 		goods = new ArrayList<Good>();
 	}
 	
 	public List<Good> getGoods() {
 		return Collections.unmodifiableList(goods);
 	}
+	
+	public void addGood(Good good) {
+		goods.add(good);
+	}
 
 	@Override
 	public String toString() {
-		return "Subcategory [goods=" + goods + "]";
+		return "Subcategory [name=" + name + ", goods=" + goods + "]";
 	}
 }
