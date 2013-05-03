@@ -7,6 +7,6 @@
 <title>XMLParsers</title>
 </head>
 <body>
-wtf
+<jsp:forward page="/WEB-INF/pages/main.jsp" />
 </body>
 </html>
