@@ -13,6 +13,14 @@ public class Category {
 		this.name = name;
 		subcategories = new ArrayList<Subcategory>();
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public List<Subcategory> getSubcategories() {
 		return Collections.unmodifiableList(subcategories);

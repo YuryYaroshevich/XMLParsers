@@ -7,14 +7,14 @@ import com.epam.xptask.command.NoCommand;
 import com.epam.xptask.command.ParseCommand;
 
 public class CommandCreator {
-	private static final String ATTR_COMMAND = "command";
+	private static final String COMMAND_PARAM = "command";
 
 	private CommandCreator() {
 	}
 
 	public static ICommand createCommand(HttpServletRequest request) {
 		CommandEnum commandEnum = getCommandEnum((String) request
-				.getParameter(ATTR_COMMAND));
+				.getParameter(COMMAND_PARAM));
 		switch (commandEnum) {
 		case PARSE:
 			return new ParseCommand();	

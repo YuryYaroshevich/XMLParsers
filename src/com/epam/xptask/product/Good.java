@@ -27,12 +27,12 @@ public class Good {
 	}
 
 	public Good(String producer, String model, String dateOfIssue,
-			String color, boolean notInStock) {
+			String color) {
 		this.producer = producer;
 		this.model = model;
 		this.dateOfIssue = dateOfIssue;
 		this.color = color;
-		this.notInStock = notInStock;
+		this.notInStock = true;
 		this.price = NOT_IN_STOCK;
 	}
 
