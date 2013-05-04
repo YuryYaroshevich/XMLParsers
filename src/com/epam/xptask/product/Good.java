@@ -35,6 +35,9 @@ public class Good {
 		this.notInStock = true;
 		this.price = NOT_IN_STOCK;
 	}
+	
+	public Good() {
+	}
 
 	public String getProducer() {
 		return producer;
