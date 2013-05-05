@@ -77,6 +77,7 @@ public class Good {
 
 	public void setPrice(int price) {
 		this.price = price;
+		this.notInStock = false;
 	}
 
 	public boolean isNotInStock() {
@@ -85,6 +86,11 @@ public class Good {
 
 	public void setNotInStock(boolean notInStock) {
 		this.notInStock = notInStock;
+	}
+	
+	public void markAsNotInStock() {
+		this.notInStock = true;
+		this.price = NOT_IN_STOCK;
 	}
 
 	@Override
