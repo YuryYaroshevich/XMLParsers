@@ -3,7 +3,7 @@ package com.epam.xptask.util.pagegetter;
 import java.util.ResourceBundle;
 
 public class PageGetter {
-	private static final String PAGES_PROPERTY = "com.epam.xptask.pagegetter.pages";
+	private static final String PAGES_PROPERTY = "com.epam.xptask.util.pagegetter.pages";
 	
 	private static final ResourceBundle bundle = ResourceBundle
 			.getBundle(PAGES_PROPERTY);

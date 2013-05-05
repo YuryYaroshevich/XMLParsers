@@ -7,7 +7,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.epam.xptask.exception.XPException;
 import com.epam.xptask.parser.ProductsXMLParser;
 import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
@@ -15,8 +14,6 @@ import com.epam.xptask.product.Category;
 
 public class ProductsXMLSAXParser implements ProductsXMLParser {
 	private final XMLReader xmlReader;
-
-	private final ProductsSAXHandler handler = new ProductsSAXHandler();
 
 	public ProductsXMLSAXParser() throws ParserTechnicalException {
 		try {
@@ -30,11 +27,10 @@ public class ProductsXMLSAXParser implements ProductsXMLParser {
 	public List<Category> parse(String xmlLocation)
 			throws ParserLogicalException, ParserTechnicalException {
 		try {
+			ProductsSAXHandler handler = new ProductsSAXHandler();
 			xmlReader.setContentHandler(handler);
 			xmlReader.parse(xmlLocation);
-			List<Category> categories = handler.getCategories();
-			handler.reset();
-			return categories;
+			return handler.getCategories();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ParserTechnicalException(e);

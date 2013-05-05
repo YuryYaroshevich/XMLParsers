@@ -25,29 +25,23 @@ public class ProductsSAXHandler implements ContentHandler {
 	private ProductsXMLElement currXMLElement;
 
 	// XML elements
-	private static final String CATEGORY_ELEM = "pr:category";
-	private static final String SUBCATEGORY_ELEM = "pr:subcategory";
-	private static final String GOOD_ELEM = "pr:good";
-	private static final String PRODUCER_ELEM = "pr:producer";
-	private static final String MODEL_ELEM = "pr:model";
-	private static final String DATE_OF_ISSUE_ELEM = "pr:date-of-issue";
-	private static final String COLOR_ELEM = "pr:color";
-	private static final String PRICE_ELEM = "pr:price";
-	private static final String NOT_IN_STOCK_ELEM = "pr:not-in-stock";
+	private static final String PREFIX = "pr:";
+	
+	private static final String CATEGORY_ELEM = PREFIX + "category";
+	private static final String SUBCATEGORY_ELEM = PREFIX + "subcategory";
+	private static final String GOOD_ELEM = PREFIX + "good";
+	private static final String PRODUCER_ELEM = PREFIX + "producer";
+	private static final String MODEL_ELEM = PREFIX + "model";
+	private static final String DATE_OF_ISSUE_ELEM = PREFIX + "date-of-issue";
+	private static final String COLOR_ELEM = PREFIX + "color";
+	private static final String PRICE_ELEM = PREFIX + "price";
+	private static final String NOT_IN_STOCK_ELEM = PREFIX + "not-in-stock";
 
 	private static final String NAME_ATTR = "name";
 
 	public ProductsSAXHandler() {
 		super();
 		categories = new ArrayList<Category>();
-	}
-
-	public void reset() {
-		categories.clear();
-		currCategory = null;
-		currSubcategory = null;
-		currGood = null;
-		currXMLElement = null;
 	}
 	
 	public List<Category> getCategories() {

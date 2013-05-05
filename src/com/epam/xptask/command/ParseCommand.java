@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.epam.xptask.exception.XPException;
 import com.epam.xptask.exception.XPLogicalException;
 import com.epam.xptask.exception.XPTechnicalException;
 import com.epam.xptask.parser.ProductsXMLParser;
