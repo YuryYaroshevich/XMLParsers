@@ -37,38 +37,44 @@ public class ProductsDOMHandler {
 		NodeList categoryNodes = root.getElementsByTagName(CATEGORY_ELEM);
 		for (int i = 0; i < categoryNodes.getLength(); i++) {
 			Element categoryElem = (Element) categoryNodes.item(i);
-			Attr nameAttr = (Attr) categoryElem.getAttributes().getNamedItem(
-					NAME_ATTR);
-			Category category = new Category(nameAttr.getValue());
-			categories.add(category);
-			NodeList subcategoryNodes = categoryElem
-					.getElementsByTagName(SUBCATEGORY_ELEM);
-			for (int j = 0; j < subcategoryNodes.getLength(); j++) {
-				Element subcategoryNode = (Element) subcategoryNodes.item(j);
-				nameAttr = (Attr) subcategoryNode.getAttributes().getNamedItem(
-						NAME_ATTR);
-				Subcategory subcategory = new Subcategory(nameAttr.getValue());
-				category.addSubcategory(subcategory);
-				NodeList goodNodes = subcategoryNode
-						.getElementsByTagName(GOOD_ELEM);
-				for (int k = 0; k < goodNodes.getLength(); k++) {
-					Element goodElem = (Element) goodNodes.item(k);
-					Good good = new Good();
-					good.setProducer(getChildValue(goodElem, PRODUCER_ELEM));
-					good.setModel(getChildValue(goodElem, MODEL_ELEM));
-					good.setDateOfIssue(getChildValue(goodElem,
-							DATE_OF_ISSUE_ELEM));
-					good.setColor(getChildValue(goodElem, COLOR_ELEM));
-					setGoodShopingState(good, goodElem);
-					subcategory.addGood(good);
-				}
-			}
+			categories.add(buildCategory(categoryElem));
 		}
 		return categories;
 	}
-	
-	private static void processCategoryElement(Element categoryElem) {
-		
+
+	private static Category buildCategory(Element categoryElem) {
+		Attr nameAttr = (Attr) categoryElem.getAttributes().getNamedItem(
+				NAME_ATTR);
+		Category category = new Category(nameAttr.getValue());
+		NodeList subcategoryNodes = categoryElem
+				.getElementsByTagName(SUBCATEGORY_ELEM);
+		for (int j = 0; j < subcategoryNodes.getLength(); j++) {
+			Element subcategoryElem = (Element) subcategoryNodes.item(j);
+			category.addSubcategory(buildSubcategory(subcategoryElem));
+		}
+		return category;
+	}
+
+	private static Subcategory buildSubcategory(Element subcategoryElem) {
+		Attr nameAttr = (Attr) subcategoryElem.getAttributes().getNamedItem(
+				NAME_ATTR);
+		Subcategory subcategory = new Subcategory(nameAttr.getValue());
+		NodeList goodNodes = subcategoryElem.getElementsByTagName(GOOD_ELEM);
+		for (int k = 0; k < goodNodes.getLength(); k++) {
+			Element goodElem = (Element) goodNodes.item(k);
+			subcategory.addGood(buildGood(goodElem));
+		}
+		return subcategory;
+	}
+
+	private static Good buildGood(Element goodElem) {
+		Good good = new Good();
+		good.setProducer(getChildValue(goodElem, PRODUCER_ELEM));
+		good.setModel(getChildValue(goodElem, MODEL_ELEM));
+		good.setDateOfIssue(getChildValue(goodElem, DATE_OF_ISSUE_ELEM));
+		good.setColor(getChildValue(goodElem, COLOR_ELEM));
+		setGoodShopingState(good, goodElem);
+		return good;
 	}
 
 	private static void setGoodShopingState(Good good, Element goodElem) {

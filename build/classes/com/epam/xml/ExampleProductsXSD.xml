@@ -29,4 +29,15 @@
 			</pr:good>
 		</pr:subcategory>
 	</pr:category>
+	<pr:category name="ice-cream">
+		<pr:subcategory name="fruit ice-cream">
+			<pr:good>
+				<pr:producer>Cold fruit</pr:producer>
+				<pr:model>IC320</pr:model>
+				<pr:date-of-issue>21-05-2013</pr:date-of-issue>
+				<pr:color>blue</pr:color>
+				<pr:price>40</pr:price>
+			</pr:good>
+		</pr:subcategory>
+	</pr:category>
 </pr:products>
