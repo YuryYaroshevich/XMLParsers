@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.xptask.command.ICommand;
+import com.epam.xptask.command.Command;
 import com.epam.xptask.command.creator.CommandCreator;
 import com.epam.xptask.exception.XPLogicalException;
 import com.epam.xptask.exception.XPTechnicalException;
@@ -28,7 +28,7 @@ public class ParserController extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ICommand command = CommandCreator.createCommand(request);
+		Command command = CommandCreator.createCommand(request);
 		String page;
 		try {
 			page = command.execute(request);

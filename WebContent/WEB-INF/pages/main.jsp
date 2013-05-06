@@ -14,7 +14,7 @@
 		<a href="/XMLParsers/controller?command=PARSE&parser=DOM">DOM</a>
 	</div>
 	<div>
-		<a href="/XMLParsers/controller?command=PARSE&parser=STAX">STAX</a>
+		<a href="/XMLParsers/controller?command=PARSE&parser=STAX">StAX</a>
 	</div>
 </body>
 </html>

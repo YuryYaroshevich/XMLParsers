@@ -2,7 +2,7 @@ package com.epam.xptask.command.creator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.epam.xptask.command.ICommand;
+import com.epam.xptask.command.Command;
 import com.epam.xptask.command.NoCommand;
 import com.epam.xptask.command.ParseCommand;
 
@@ -12,7 +12,7 @@ public class CommandCreator {
 	private CommandCreator() {
 	}
 
-	public static ICommand createCommand(HttpServletRequest request) {
+	public static Command createCommand(HttpServletRequest request) {
 		CommandEnum commandEnum = getCommandEnum((String) request
 				.getParameter(COMMAND_PARAM));
 		switch (commandEnum) {
