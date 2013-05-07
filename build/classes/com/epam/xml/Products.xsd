@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.epam.com/Products"
 	xmlns:tns="http://www.epam.com/Products" elementFormDefault="qualified">
-
 	<element name="products">
 		<complexType>
 			<sequence>
@@ -10,7 +9,6 @@
 			</sequence>
 		</complexType>
 	</element>
-
 	<complexType name="Category">
 		<sequence>
 			<element name="subcategory" type="tns:Subcategory" minOccurs="1"
@@ -18,14 +16,12 @@
 		</sequence>
 		<attribute name="name" type="string" />
 	</complexType>
-
 	<complexType name="Subcategory">
 		<sequence>
 			<element name="good" type="tns:Good" minOccurs="1" maxOccurs="unbounded" />
 		</sequence>
 		<attribute name="name" type="string" />
 	</complexType>
-
 	<complexType name="Good">
 		<sequence>
 			<element name="producer" type="string" />
@@ -38,13 +34,11 @@
 			</choice>
 		</sequence>
 	</complexType>
-
 	<simpleType name="dd-MM-YYYY-date">
 		<restriction base="string">
 			<pattern value="(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-(19\d{2}|2\d{3})" />
 		</restriction>
 	</simpleType>
-
 	<simpleType name="ProductModel">
 		<restriction base="string">
 			<pattern value="[a-zA-z]{2}\d{3}" />

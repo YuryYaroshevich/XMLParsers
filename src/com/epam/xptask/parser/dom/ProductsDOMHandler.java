@@ -12,19 +12,10 @@ import com.epam.xptask.product.Category;
 import com.epam.xptask.product.Good;
 import com.epam.xptask.product.Subcategory;
 
+import static com.epam.xptask.parser.ProductsXMLElement.*;
+
 public class ProductsDOMHandler {
 	private Element root;
-
-	// XML elements
-	private static final String PREFIX = "pr:";
-	private static final String CATEGORY_ELEM = PREFIX + "category";
-	private static final String SUBCATEGORY_ELEM = PREFIX + "subcategory";
-	private static final String GOOD_ELEM = PREFIX + "good";
-	private static final String PRODUCER_ELEM = PREFIX + "producer";
-	private static final String MODEL_ELEM = PREFIX + "model";
-	private static final String DATE_OF_ISSUE_ELEM = PREFIX + "date-of-issue";
-	private static final String COLOR_ELEM = PREFIX + "color";
-	private static final String PRICE_ELEM = PREFIX + "price";
 
 	private static final String NAME_ATTR = "name";
 

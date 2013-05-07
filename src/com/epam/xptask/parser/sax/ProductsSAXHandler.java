@@ -13,6 +13,8 @@ import com.epam.xptask.product.Category;
 import com.epam.xptask.product.Good;
 import com.epam.xptask.product.Subcategory;
 
+import static com.epam.xptask.parser.ProductsXMLElement.*;
+
 public class ProductsSAXHandler implements ContentHandler {
 	private List<Category> categories;
 
@@ -22,20 +24,7 @@ public class ProductsSAXHandler implements ContentHandler {
 
 	private Good currGood;
 
-	private ProductsXMLElement currXMLElement;
-
-	// XML elements
-	private static final String PREFIX = "pr:";
-	
-	private static final String CATEGORY_ELEM = PREFIX + "category";
-	private static final String SUBCATEGORY_ELEM = PREFIX + "subcategory";
-	private static final String GOOD_ELEM = PREFIX + "good";
-	private static final String PRODUCER_ELEM = PREFIX + "producer";
-	private static final String MODEL_ELEM = PREFIX + "model";
-	private static final String DATE_OF_ISSUE_ELEM = PREFIX + "date-of-issue";
-	private static final String COLOR_ELEM = PREFIX + "color";
-	private static final String PRICE_ELEM = PREFIX + "price";
-	private static final String NOT_IN_STOCK_ELEM = PREFIX + "not-in-stock";
+	private String currXMLElement;
 
 	private static final String NAME_ATTR = "name";
 
@@ -77,17 +66,9 @@ public class ProductsSAXHandler implements ContentHandler {
 		}
 	}
 
-	private boolean isCategoryElement(String qName) {
-		return CATEGORY_ELEM.equals(qName);
-	}
-
 	private void processCategoryElement(Attributes atts) {
 		currCategory = new Category(atts.getValue(NAME_ATTR));
 		categories.add(currCategory);
-	}
-
-	private boolean isSubcategoryElement(String qName) {
-		return SUBCATEGORY_ELEM.equals(qName);
 	}
 
 	private void processSubcategoryElement(Attributes atts) {
@@ -95,57 +76,29 @@ public class ProductsSAXHandler implements ContentHandler {
 		currCategory.addSubcategory(currSubcategory);
 	}
 
-	private boolean isGoodElement(String qName) {
-		return GOOD_ELEM.equals(qName);
-	}
-
 	private void processGoodElement() {
 		currGood = new Good();
 		currSubcategory.addGood(currGood);
 	}
 
-	private boolean isProducerElement(String qName) {
-		return PRODUCER_ELEM.equals(qName);
-	}
-
 	private void processProducerElement() {
-		currXMLElement = ProductsXMLElement.PRODUCER;
-	}
-
-	private boolean isModelElement(String qName) {
-		return MODEL_ELEM.equals(qName);
+		currXMLElement = PRODUCER_ELEM;
 	}
 
 	private void processModelElement() {
-		currXMLElement = ProductsXMLElement.MODEL;
-	}
-
-	private boolean isDateOfIssueElement(String qName) {
-		return DATE_OF_ISSUE_ELEM.equals(qName);
+		currXMLElement = MODEL_ELEM;
 	}
 
 	private void processDateOfIssueElement() {
-		currXMLElement = ProductsXMLElement.DATE_OF_ISSUE;
-	}
-
-	private boolean isColorElement(String qName) {
-		return COLOR_ELEM.equals(qName);
+		currXMLElement = DATE_OF_ISSUE_ELEM;
 	}
 
 	private void processColorElement() {
-		currXMLElement = ProductsXMLElement.COLOR;
-	}
-
-	private boolean isPriceElement(String qName) {
-		return PRICE_ELEM.equals(qName);
+		currXMLElement = COLOR_ELEM;
 	}
 
 	private void processPriceElement() {
-		currXMLElement = ProductsXMLElement.PRICE;
-	}
-
-	private boolean isNotInStockElement(String qName) {
-		return NOT_IN_STOCK_ELEM.equals(qName);
+		currXMLElement = PRICE_ELEM;
 	}
 
 	private void processNotInStockElement() {
@@ -158,22 +111,16 @@ public class ProductsSAXHandler implements ContentHandler {
 			return;
 		}
 		String value = new String(ch, start, length).trim();
-		switch (currXMLElement) {
-		case PRODUCER:
+		if (PRODUCER_ELEM.equals(currXMLElement)) {
 			currGood.setProducer(value);
-			break;
-		case MODEL:
+		} else if (MODEL_ELEM.equals(currXMLElement)) {
 			currGood.setModel(value);
-			break;
-		case DATE_OF_ISSUE:
+		} else if (DATE_OF_ISSUE_ELEM.equals(currXMLElement)) {
 			currGood.setDateOfIssue(value);
-			break;
-		case COLOR:
+		} else if (COLOR_ELEM.equals(currXMLElement)) {
 			currGood.setColor(value);
-			break;
-		case PRICE:
+		} else if (PRICE_ELEM.equals(currXMLElement)) {
 			currGood.setPrice(Integer.valueOf(value));
-			break;
 		}
 	}
 

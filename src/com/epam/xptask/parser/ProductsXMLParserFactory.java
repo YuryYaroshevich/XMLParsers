@@ -3,6 +3,7 @@ package com.epam.xptask.parser;
 import com.epam.xptask.parser.dom.ProductsXMLDOMParser;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.parser.sax.ProductsXMLSAXParser;
+import com.epam.xptask.parser.stax.ProductsXMLStAXParser;
 
 public class ProductsXMLParserFactory {
 	private static final String SAX_TYPE = "SAX";
@@ -18,7 +19,7 @@ public class ProductsXMLParserFactory {
 		} else if (DOM_TYPE.equals(parserType)) {
 			return new ProductsXMLDOMParser();
 		} else {
-			return null;
+			return new ProductsXMLStAXParser();
 		}		
 	}
 }
