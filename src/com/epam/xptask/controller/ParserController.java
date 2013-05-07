@@ -14,17 +14,18 @@ import com.epam.xptask.parser.ProductsXMLParserFactory;
 import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.product.Category;
-import com.epam.xptask.util.pagegetter.PageGetter;
 
 public class ParserController extends HttpServlet {
 	private static final long serialVersionUID = 7688907932488576018L;
-	
+
 	private static final String PARSER_PARAM = "parser";
 
 	private static final String CATEGORIES_ATTR = "categories";
 
 	private static final String PRODUCTS_XML =
 			"c:/workspace/XMLParsers/src/com/epam/xml/ExampleProductsXSD.xml";
+
+	private static final String PRODUCTS_PAGE = "/WEB-INF/pages/products/products.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,31 +38,23 @@ public class ParserController extends HttpServlet {
 	}
 
 	private void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {	
+			HttpServletResponse response) throws ServletException, IOException {
 		try {
+			// find appropriate XML parser
 			String parserType = request.getParameter(PARSER_PARAM);
 			ProductsXMLParser parser = ProductsXMLParserFactory
 					.getParser(parserType);
+			// fill list of categories
 			List<Category> categories = parser.parse(PRODUCTS_XML);
+			// set request attribute
 			request.setAttribute(CATEGORIES_ATTR, categories);
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher(
-							PageGetter.getPage(PageGetter.PRODUCTS_PAGE));
+					.getRequestDispatcher(PRODUCTS_PAGE);
 			dispatcher.forward(request, response);
 		} catch (ParserTechnicalException e) {
 			e.printStackTrace();
 		} catch (ParserLogicalException e) {
 			e.printStackTrace();
 		}
-		
-		/*
-		 * Command command = CommandCreator.createCommand(request); String page;
-		 * try { page = command.execute(request); } catch (XPTechnicalException
-		 * e) { e.printStackTrace(); throw new ServletException(e); } catch
-		 * (XPLogicalException e) { e.printStackTrace(); throw new
-		 * ServletException(e); } RequestDispatcher dispatcher =
-		 * getServletContext() .getRequestDispatcher(page);
-		 * dispatcher.forward(request, response);
-		 */
 	}
 }

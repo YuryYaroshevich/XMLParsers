@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="css/tableborder.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/tableborder.css" type="text/css"
+	media="screen" />
 <title>Products</title>
 </head>
 <body>
@@ -16,10 +17,12 @@
 				<td>${category.name}</td>
 				<td></td>
 			</tr>
-			<%@ include file="subcategory.jsp" %>
+			<c:forEach var="subcategory" items="${category.subcategories}">
+				<%@ include file="subcategory.jsp"%>
+			</c:forEach>
 		</c:forEach>
 	</table>
 
-    <a href="/XMLParsers/index.jsp">Back</a>
+	<a href="/XMLParsers/index.jsp">Back</a>
 </body>
 </html>

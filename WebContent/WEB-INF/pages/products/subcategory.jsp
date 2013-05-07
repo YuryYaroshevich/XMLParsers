@@ -2,10 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:forEach var="subcategory" items="${category.subcategories}">
-	<tr>
-		<td></td>
-		<td>${subcategory.name}</td>
-	</tr>
+
+<tr>
+	<td></td>
+	<td>${subcategory.name}</td>
+</tr>
+<c:forEach var="good" items="${subcategory.goods}">
 	<%@ include file="good.jsp"%>
 </c:forEach>
