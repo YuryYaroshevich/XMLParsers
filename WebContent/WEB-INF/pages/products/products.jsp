@@ -20,9 +20,6 @@
 		</c:forEach>
 	</table>
 
-	<form action="controller" method="get">
-		<input type="hidden" name="command" value="NO_COMMAND" /> <input
-			type="submit" value="BACK" />
-	</form>
+    <a href="/XMLParsers/index.jsp">Back</a>
 </body>
 </html>
