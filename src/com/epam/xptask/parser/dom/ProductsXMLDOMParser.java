@@ -22,6 +22,8 @@ public class ProductsXMLDOMParser implements ProductsXMLParser {
 
 	private final DocumentBuilder docBuilder;
 	
+	private static final ProductsDOMHandler handler = new ProductsDOMHandler();
+	
 	public ProductsXMLDOMParser() throws ParserTechnicalException {
 		try {
 			docBuilder = docBuilderfactory.newDocumentBuilder();
@@ -36,8 +38,7 @@ public class ProductsXMLDOMParser implements ProductsXMLParser {
 		try {
 			Document document = docBuilder.parse(xml);
 			Element root = document.getDocumentElement();
-			List<Category> categories = new ProductsDOMHandler(root)
-					.getCategories();
+			List<Category> categories = handler.getCategories(root);
 			return categories;
 		} catch (SAXException e) {
 			e.printStackTrace();

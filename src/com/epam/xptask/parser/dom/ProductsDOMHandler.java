@@ -15,15 +15,9 @@ import com.epam.xptask.product.Subcategory;
 import static com.epam.xptask.parser.ProductsXMLElement.*;
 
 public class ProductsDOMHandler {
-	private Element root;
-
 	private static final String NAME_ATTR = "name";
 
-	public ProductsDOMHandler(Element root) {
-		this.root = root;
-	}
-
-	public List<Category> getCategories() {
+	public List<Category> getCategories(Element root) {
 		List<Category> categories = new ArrayList<Category>();
 		NodeList categoryNodes = root.getElementsByTagName(CATEGORY_ELEM);
 		for (int i = 0; i < categoryNodes.getLength(); i++) {
