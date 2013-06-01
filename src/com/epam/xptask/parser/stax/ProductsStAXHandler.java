@@ -13,19 +13,22 @@ import com.epam.xptask.product.Subcategory;
 
 import static com.epam.xptask.parser.ProductsXMLElement.*;
 
-public class ProductsStAXHandler {
+final class ProductsStAXHandler {
 	private static final String NAME_ATTR = "name";
 
 	// for concatenating prefix and local name of element
 	private static final String COLON = ":";
 
-	public List<Category> getCategories(XMLStreamReader reader)
+	private ProductsStAXHandler() {
+	}
+
+	public static List<Category> getCategories(XMLStreamReader reader)
 			throws XMLStreamException {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = null;
 		Subcategory subcategory = null;
 		Good good = null;
-		// this variable will contain part of document where reader read during
+		// this variable will define XML element which reader read during
 		// the current iteration
 		int readerLocation;
 		String elementName;

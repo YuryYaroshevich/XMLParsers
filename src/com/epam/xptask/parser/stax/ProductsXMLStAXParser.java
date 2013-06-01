@@ -14,19 +14,26 @@ import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.product.Category;
 
-public class ProductsXMLStAXParser implements ProductsXMLParser {
+public final class ProductsXMLStAXParser implements ProductsXMLParser {
+	private static final ProductsXMLParser parser = new ProductsXMLStAXParser();
+
 	private static final XMLInputFactory xmlInputFactory = XMLInputFactory
 			.newInstance();
 
-	private static final ProductsStAXHandler handler = new ProductsStAXHandler();
-
-	public List<Category> parse(String xml) throws ParserLogicalException,
-			ParserTechnicalException {
+	private ProductsXMLStAXParser() {
+	}
+	
+	public static ProductsXMLParser getInstance() {
+		return parser;
+	}
+	
+	public List<Category> parse(String xml)
+			throws ParserLogicalException, ParserTechnicalException {
 		try {
 			InputStream input = new FileInputStream(xml);
 			XMLStreamReader reader = xmlInputFactory
 					.createXMLStreamReader(input);
-			return handler.getCategories(reader);
+			return ProductsStAXHandler.getCategories(reader);
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
 			throw new ParserTechnicalException(e);

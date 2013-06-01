@@ -15,7 +15,7 @@ import com.epam.xptask.product.Subcategory;
 
 import static com.epam.xptask.parser.ProductsXMLElement.*;
 
-public class ProductsSAXHandler implements ContentHandler {
+class ProductsSAXHandler implements ContentHandler {
 	private List<Category> categories;
 
 	private Category currCategory;

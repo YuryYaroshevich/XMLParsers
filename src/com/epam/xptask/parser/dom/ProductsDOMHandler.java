@@ -14,10 +14,13 @@ import com.epam.xptask.product.Subcategory;
 
 import static com.epam.xptask.parser.ProductsXMLElement.*;
 
-public class ProductsDOMHandler {
+final class ProductsDOMHandler {
 	private static final String NAME_ATTR = "name";
 
-	public List<Category> getCategories(Element root) {
+	private ProductsDOMHandler() {
+	}
+	
+	public static List<Category> getCategories(Element root) {
 		List<Category> categories = new ArrayList<Category>();
 		NodeList categoryNodes = root.getElementsByTagName(CATEGORY_ELEM);
 		for (int i = 0; i < categoryNodes.getLength(); i++) {

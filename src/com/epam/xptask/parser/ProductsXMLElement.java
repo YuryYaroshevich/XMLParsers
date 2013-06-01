@@ -1,7 +1,7 @@
 package com.epam.xptask.parser;
 
 
-public class ProductsXMLElement {
+public final class ProductsXMLElement {
 	private static final String PREFIX = "pr:";
 
 	public static final String CATEGORY_ELEM = PREFIX + "category";

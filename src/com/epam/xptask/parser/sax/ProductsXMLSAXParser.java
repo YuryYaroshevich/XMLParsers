@@ -12,21 +12,20 @@ import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.product.Category;
 
-public class ProductsXMLSAXParser implements ProductsXMLParser {
-	private final XMLReader xmlReader;
+public final class ProductsXMLSAXParser implements ProductsXMLParser {
+	private static final ProductsXMLParser parser = new ProductsXMLSAXParser();
 
-	public ProductsXMLSAXParser() throws ParserTechnicalException {
-		try {
-			xmlReader = XMLReaderFactory.createXMLReader();
-		} catch (SAXException e) {
-			e.printStackTrace();
-			throw new ParserTechnicalException(e);
-		}
+	private ProductsXMLSAXParser() {
+	}
+
+	public static ProductsXMLParser getInstance() {
+		return parser;
 	}
 
 	public List<Category> parse(String xmlLocation)
 			throws ParserLogicalException, ParserTechnicalException {
 		try {
+			XMLReader xmlReader = XMLReaderFactory.createXMLReader();
 			ProductsSAXHandler handler = new ProductsSAXHandler();
 			xmlReader.setContentHandler(handler);
 			xmlReader.parse(xmlLocation);

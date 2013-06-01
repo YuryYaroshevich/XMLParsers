@@ -5,7 +5,7 @@ import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.parser.sax.ProductsXMLSAXParser;
 import com.epam.xptask.parser.stax.ProductsXMLStAXParser;
 
-public class ProductsXMLParserFactory {
+public final class ProductsXMLParserFactory {
 	private static final String SAX_TYPE = "SAX";
 	private static final String DOM_TYPE = "DOM";
 
@@ -15,11 +15,11 @@ public class ProductsXMLParserFactory {
 	public static ProductsXMLParser getParser(String parserType)
 			throws ParserTechnicalException {
 		if (SAX_TYPE.equals(parserType)) {
-			return new ProductsXMLSAXParser();
+			return ProductsXMLSAXParser.getInstance();
 		} else if (DOM_TYPE.equals(parserType)) {
-			return new ProductsXMLDOMParser();
+			return ProductsXMLDOMParser.getInstance();
 		} else {
-			return new ProductsXMLStAXParser();
+			return ProductsXMLStAXParser.getInstance();
 		}		
 	}
 }

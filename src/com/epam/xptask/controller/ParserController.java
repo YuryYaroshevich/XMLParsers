@@ -14,6 +14,7 @@ import com.epam.xptask.parser.ProductsXMLParserFactory;
 import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.product.Category;
+import static com.epam.resource.FileURLReader.*;
 
 public class ParserController extends HttpServlet {
 	private static final long serialVersionUID = 7688907932488576018L;
@@ -21,11 +22,6 @@ public class ParserController extends HttpServlet {
 	private static final String PARSER_PARAM = "parser";
 
 	private static final String CATEGORIES_ATTR = "categories";
-
-	private static final String PRODUCTS_XML =
-			"c:/workspace/XMLParsers/src/com/epam/xml/ExampleProductsXSD.xml";
-
-	private static final String PRODUCTS_PAGE = "/WEB-INF/pages/products/products.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,11 +41,11 @@ public class ParserController extends HttpServlet {
 			ProductsXMLParser parser = ProductsXMLParserFactory
 					.getParser(parserType);
 			// fill list of categories
-			List<Category> categories = parser.parse(PRODUCTS_XML);
+			List<Category> categories = parser.parse(getFileURL(PRODUCTS_XML));
 			// set request attribute
 			request.setAttribute(CATEGORIES_ATTR, categories);
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher(PRODUCTS_PAGE);
+					.getRequestDispatcher(getFileURL(PRODUCTS_PAGE));
 			dispatcher.forward(request, response);
 		} catch (ParserTechnicalException e) {
 			e.printStackTrace();

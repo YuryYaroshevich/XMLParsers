@@ -16,29 +16,26 @@ import com.epam.xptask.parser.exception.ParserLogicalException;
 import com.epam.xptask.parser.exception.ParserTechnicalException;
 import com.epam.xptask.product.Category;
 
-public class ProductsXMLDOMParser implements ProductsXMLParser {
+public final class ProductsXMLDOMParser implements ProductsXMLParser {
+	private static final ProductsXMLParser parser = new ProductsXMLDOMParser();
+	
 	private static final DocumentBuilderFactory docBuilderfactory = DocumentBuilderFactory
 			.newInstance();
 
-	private final DocumentBuilder docBuilder;
-	
-	private static final ProductsDOMHandler handler = new ProductsDOMHandler();
-	
-	public ProductsXMLDOMParser() throws ParserTechnicalException {
-		try {
-			docBuilder = docBuilderfactory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			throw new ParserTechnicalException(e);
-		}
+	private ProductsXMLDOMParser() {
 	}
-	
+
+	public static ProductsXMLParser getInstance() {
+		return parser;
+	}
+
 	public List<Category> parse(String xml) throws ParserLogicalException,
 			ParserTechnicalException {
 		try {
+			DocumentBuilder docBuilder = docBuilderfactory.newDocumentBuilder();
 			Document document = docBuilder.parse(xml);
 			Element root = document.getDocumentElement();
-			List<Category> categories = handler.getCategories(root);
+			List<Category> categories = ProductsDOMHandler.getCategories(root);
 			return categories;
 		} catch (SAXException e) {
 			e.printStackTrace();
@@ -46,7 +43,9 @@ public class ProductsXMLDOMParser implements ProductsXMLParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ParserTechnicalException(e);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+			throw new ParserTechnicalException(e);
 		}
 	}
-
 }
